@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.zip
+!leftmodel.zip
+!model/*.zip
+model/*.pth
+model/*.pt
+model/*.pkl
+tensorboard_logs/
+*.log
+.env
+.venv
+venv/
