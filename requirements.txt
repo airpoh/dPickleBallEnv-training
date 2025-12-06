@@ -1,0 +1,20 @@
+# Core ML-Agents packages (install from source - see README)
+# These must be installed separately by cloning the ML-Agents repository
+# See README.md "Prerequisites" section for installation instructions
+
+# Stable-Baselines3 and dependencies
+stable-baselines3>=2.0.0
+torch>=1.13.0
+gym>=0.21.0
+shimmy>=2.0.0
+
+# Image processing
+opencv-python==4.7.0.72
+numpy==1.23.5
+
+# Note: mlagents-envs and mlagents must be installed from source:
+# git clone https://github.com/dPickleball/dpickleball-ml-agents.git
+# cd dpickleball-ml-agents
+# pip install -e ./ml-agents-envs
+# pip install -e ./ml-agents
+

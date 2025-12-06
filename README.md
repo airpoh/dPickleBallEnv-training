@@ -34,16 +34,29 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
    conda activate dpickleball
    ```
 
-2. Install ML-Agents:
+2. **Install ML-Agents (REQUIRED - from separate repository):**
+   
+   ⚠️ **IMPORTANT:** You must clone the ML-Agents repository separately. These packages are NOT in this repository.
+   
    ```bash
+   # Clone the ML-Agents repository (do this OUTSIDE of this repository)
    git clone https://github.com/dPickleball/dpickleball-ml-agents.git
    cd dpickleball-ml-agents
+   
+   # Install from source (the -e flag requires the source code to be present)
    pip install -e ./ml-agents-envs
    pip install -e ./ml-agents
+   
+   # Go back to your training repository
+   cd ..
    ```
 
-3. Install required packages:
+3. Install other required packages:
    ```bash
+   # Option 1: Install from requirements.txt (recommended)
+   pip install -r requirements.txt
+   
+   # Option 2: Install individually
    pip install stable-baselines3
    pip install torch
    pip install gym
