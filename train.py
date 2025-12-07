@@ -15,6 +15,13 @@ TOTAL_TIMESTEPS = 1_000_000  # Total timesteps to train (or continue training)
 # Note: If model already trained 1M steps, increase this to continue (e.g., 2_000_000 for 2M total)
 CHECKPOINT_FREQ = 10_000  # Save checkpoint every N steps (lower = more frequent saves, safer but uses more disk space)
 
+# ⚠️ IMPORTANT: Update this path to point to your Unity build location!
+# You can also set the UNITY_BUILD_PATH environment variable instead
+UNITY_BUILD_PATH = os.getenv(
+    "UNITY_BUILD_PATH",
+    r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe"  # DEFAULT - UPDATE THIS!
+)
+
 # Create model directory if it doesn't exist
 os.makedirs(MODEL_DIR, exist_ok=True)
 
@@ -33,10 +40,41 @@ reward_cum = [0, 0]
 channel.send_data(serve=213, p1=reward_cum[0], p2=reward_cum[1])
 
 print("Creating Unity environment...")
-unity_env = UnityEnvironment(
-    r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe",
-    side_channels=[string_channel, channel]
-)
+print(f"Unity build path: {UNITY_BUILD_PATH}")
+
+# Check if Unity build exists
+if not os.path.exists(UNITY_BUILD_PATH):
+    print("\n" + "=" * 60)
+    print("❌ ERROR: Unity build file not found!")
+    print("=" * 60)
+    print(f"Path: {UNITY_BUILD_PATH}")
+    print("\nPlease update the UNITY_BUILD_PATH in train.py (line 20) or set the")
+    print("UNITY_BUILD_PATH environment variable to point to your Unity build.")
+    print("\nExample:")
+    print('  UNITY_BUILD_PATH = r"C:\\Path\\To\\Your\\Unity\\Build\\dp.exe"')
+    print("\nOr set environment variable:")
+    print('  set UNITY_BUILD_PATH="C:\\Path\\To\\Your\\Unity\\Build\\dp.exe"')
+    print("=" * 60)
+    exit(1)
+
+try:
+    unity_env = UnityEnvironment(
+        UNITY_BUILD_PATH,
+        side_channels=[string_channel, channel]
+    )
+except Exception as e:
+    print("\n" + "=" * 60)
+    print("❌ ERROR: Failed to launch Unity environment!")
+    print("=" * 60)
+    print(f"Error: {e}")
+    print(f"\nPath used: {UNITY_BUILD_PATH}")
+    print("\nPlease check:")
+    print("  1. The path is correct and points to dp.exe")
+    print("  2. The Unity build exists at that location")
+    print("  3. You have permission to run the executable")
+    print("\nUpdate UNITY_BUILD_PATH in train.py (line 20) or set environment variable.")
+    print("=" * 60)
+    raise
 
 print("Wrapping environment with reward shaping...")
 env = SharedObsUnityGymWrapper(unity_env, frame_stack=64, img_size=(168, 84), grayscale=True)

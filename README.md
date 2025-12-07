@@ -67,12 +67,28 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
 
 ### Training
 
-1. **Test your setup first:**
+1. **⚠️ IMPORTANT: Update Unity Build Path First!**
+   
+   Before running training, you MUST update the Unity build path in both `train.py` and `test_training.py`.
+   
+   Look for `UNITY_BUILD_PATH` near the top of each file (around line 20) and update it:
+   ```python
+   UNITY_BUILD_PATH = os.getenv(
+       "UNITY_BUILD_PATH",
+       r"C:\Your\Path\To\Unity\Build\dp.exe"  # UPDATE THIS!
+   )
+   ```
+   
+   Or set the `UNITY_BUILD_PATH` environment variable instead.
+   
+   See `SETUP_INSTRUCTIONS.md` for detailed instructions.
+
+2. **Test your setup first:**
    ```bash
    python test_training.py
    ```
 
-2. **Start training:**
+3. **Start training:**
    ```bash
    python train.py
    ```

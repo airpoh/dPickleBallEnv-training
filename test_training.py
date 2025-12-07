@@ -20,6 +20,13 @@ print("Press Ctrl+C at any time to stop\n")
 MODEL_DIR = "./model"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
+# ⚠️ IMPORTANT: Update this path to point to your Unity build location!
+# You can also set the UNITY_BUILD_PATH environment variable instead
+UNITY_BUILD_PATH = os.getenv(
+    "UNITY_BUILD_PATH",
+    r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe"  # DEFAULT - UPDATE THIS!
+)
+
 string_channel = StringSideChannel()
 channel = CustomDataChannel()
 reward_cum = [0, 0]
@@ -27,15 +34,42 @@ channel.send_data(serve=213, p1=reward_cum[0], p2=reward_cum[1])
 
 # Test 1: Unity Environment
 print("[TEST 1/4] Creating Unity environment...")
+print(f"Unity build path: {UNITY_BUILD_PATH}")
+
+# Check if Unity build exists
+if not os.path.exists(UNITY_BUILD_PATH):
+    print(f"✗ FAILED: Unity build file not found at: {UNITY_BUILD_PATH}")
+    print("\n" + "=" * 60)
+    print("❌ ERROR: Unity build file not found!")
+    print("=" * 60)
+    print(f"Path: {UNITY_BUILD_PATH}")
+    print("\nPlease update the UNITY_BUILD_PATH in test_training.py (line 24) or set the")
+    print("UNITY_BUILD_PATH environment variable to point to your Unity build.")
+    print("\nExample:")
+    print('  UNITY_BUILD_PATH = r"C:\\Path\\To\\Your\\Unity\\Build\\dp.exe"')
+    print("\nOr set environment variable:")
+    print('  set UNITY_BUILD_PATH="C:\\Path\\To\\Your\\Unity\\Build\\dp.exe"')
+    print("=" * 60)
+    exit(1)
+
 try:
     unity_env = UnityEnvironment(
-        r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe",
+        UNITY_BUILD_PATH,
         side_channels=[string_channel, channel]
     )
     print("✓ Unity environment created successfully!")
 except Exception as e:
     print(f"✗ FAILED: {e}")
-    print("\nUnity environment failed. Check Unity build path.")
+    print("\n" + "=" * 60)
+    print("❌ ERROR: Failed to launch Unity environment!")
+    print("=" * 60)
+    print(f"Path used: {UNITY_BUILD_PATH}")
+    print("\nPlease check:")
+    print("  1. The path is correct and points to dp.exe")
+    print("  2. The Unity build exists at that location")
+    print("  3. You have permission to run the executable")
+    print("\nUpdate UNITY_BUILD_PATH in test_training.py (line 24) or set environment variable.")
+    print("=" * 60)
     exit(1)
 
 # Test 2: Environment Wrapper
