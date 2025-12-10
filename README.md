@@ -124,6 +124,13 @@ Then run:
 python CompetitionScripts/Competition.py
 ```
 
+To play left side using your right-trained model:
+- Set environment variable before running:
+  - PowerShell: `$env:AGENT_SIDE="left"`
+  - CMD: `set AGENT_SIDE=left`
+- Default (no env var) is right side.
+- The code mirrors observations/actions so the right-trained checkpoint works on either side.
+
 ## 📊 Training Configuration
 
 - **Algorithm:** A2C (Advantage Actor-Critic)
