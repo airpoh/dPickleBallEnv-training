@@ -53,20 +53,43 @@ You need to share the **entire Unity build folder**, not just `dp.exe`. The buil
 4. Send the download link to your friend
 5. Link expires after 7 days (WeTransfer) or as specified
 
-### Method 3: GitHub Releases (If Repository is Public)
+### Method 3: GitHub Releases (Recommended for GitHub)
 
-If your repository is public, you can use GitHub Releases:
+**Best option if you want to use GitHub!**
 
-1. **Create a release:**
+1. **Zip the Unity build folder:**
    ```powershell
-   # Zip the build (same as Method 1)
-   # Then go to GitHub → Your Repository → Releases → Draft a new release
+   cd "C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles"
+   Compress-Archive -Path "Training" -DestinationPath "dPickleball_Unity_Build.zip"
    ```
 
-2. **Upload the zip file as a release asset**
-3. **Your friend downloads from the release page**
+2. **Create a GitHub Release:**
+   - Go to your GitHub repository: https://github.com/alvintehg/dPickleBallEnv-training
+   - Click "Releases" → "Create a new release"
+   - Tag: `v1.0.0` (or any version number)
+   - Title: "Unity Build for Training"
+   - Description: "Unity build required for training. Extract the zip and update UNITY_BUILD_PATH in train.py"
+   - Drag and drop `dPickleball_Unity_Build.zip` as a release asset
+   - Click "Publish release"
 
-**Note:** GitHub has a 100MB file size limit for regular uploads. If the build is larger, use Git LFS or a different method.
+3. **Your friend downloads:**
+   - Go to: https://github.com/alvintehg/dPickleBallEnv-training/releases
+   - Download `dPickleball_Unity_Build.zip`
+   - Extract and update path in `train.py`
+
+**Note:** Your build is 143MB, which is fine for GitHub Releases (up to 2GB per file).
+
+### Method 4: Upload to Repository (Not Recommended)
+
+⚠️ **Not recommended** - Makes repository large and slow to clone.
+
+If you still want to do this:
+1. The build is 143MB total (under GitHub's limits)
+2. No individual files exceed 100MB
+3. You'll need to update `.gitignore` to allow it
+4. Repository will be slower to clone
+
+**Better to use GitHub Releases (Method 3) instead!**
 
 ### Method 4: Direct File Transfer (Same Network)
 
