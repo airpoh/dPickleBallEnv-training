@@ -16,7 +16,11 @@ If you see errors like:
 - `❌ ERROR: Unity build file not found!`
 - `Couldn't launch the C:\Users\...\dp.exe environment`
 
-**This means you haven't updated the Unity build path!** See Step 5 below.
+**This means either:**
+1. **You don't have the Unity build yet** - See Step 5 to get it
+2. **You haven't updated the Unity build path** - See Step 6 to update it
+
+**Remember:** The Unity build (`dp.exe`) is NOT in this repository! You need to get it separately from the repository owner.
 
 ## ✅ Correct Setup Steps
 
@@ -56,7 +60,25 @@ cd ../dPickleBallEnv
 pip install -r requirements.txt
 ```
 
-### Step 5: Update Unity Path ⚠️ REQUIRED
+### Step 5: Get Unity Build ⚠️ REQUIRED
+
+**⚠️ IMPORTANT: The Unity build (`dp.exe`) is NOT in this repository!**
+
+You need to get the Unity build separately. The repository only contains training scripts, not the Unity game executable.
+
+**How to get the Unity build:**
+1. **Ask the repository owner** (your friend who set this up) to share the Unity build folder
+2. **Or download from the original source** if available
+3. **The Unity build should contain:**
+   - A file named `dp.exe` (the main executable)
+   - Usually located in a folder like `Training/Windows/` or `Builds/Windows/`
+   - May include other supporting files (DLLs, data folders, etc.)
+
+**Once you have the Unity build:**
+- Extract/copy it to a location on your computer (e.g., `C:\dPickleball\Training\Windows\`)
+- Remember the full path to `dp.exe`
+
+### Step 6: Update Unity Path ⚠️ REQUIRED
 
 **You MUST update the Unity build path before running training!**
 
@@ -70,7 +92,16 @@ UNITY_BUILD_PATH = os.getenv(
 )
 ```
 
-Replace the default path with your Unity build location.
+Replace `C:\Your\Path\To\Unity\Build\dp.exe` with the actual path to your `dp.exe` file.
+
+**Example:**
+If you put the Unity build in `C:\dPickleball\Training\Windows\dp.exe`, then:
+```python
+UNITY_BUILD_PATH = os.getenv(
+    "UNITY_BUILD_PATH",
+    r"C:\dPickleball\Training\Windows\dp.exe"  # Your actual path
+)
+```
 
 **Option 2: Use environment variable**
 Instead of editing files, you can set an environment variable:
@@ -87,12 +118,12 @@ set UNITY_BUILD_PATH=C:\Your\Path\To\Unity\Build\dp.exe
 python train.py
 ```
 
-**How to find your Unity build:**
-- Look for a file named `dp.exe` in your Unity build folder
-- Usually in a folder like `Training/Windows/` or `Builds/Windows/`
+**How to verify the path is correct:**
 - The path should end with `dp.exe`
+- You should be able to double-click `dp.exe` and see the Unity game window open
+- Make sure there are no typos in the path
 
-### Step 6: Test Setup
+### Step 7: Test Setup
 ```bash
 python test_training.py
 ```
@@ -105,5 +136,6 @@ The `pip install -e ./ml-agents-envs` command uses the `-e` (editable) flag, whi
 
 - **This repository** (`dPickleBallEnv`): Contains training scripts, models, and checkpoints
 - **ML-Agents repository** (`dpickleball-ml-agents`): Contains the ML-Agents source code that must be installed separately
+- **Unity Build** (`dp.exe`): The Unity game executable - NOT in this repository, must be obtained separately from the repository owner
 
 
