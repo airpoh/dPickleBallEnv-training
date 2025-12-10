@@ -1,8 +1,10 @@
 # How to Share Unity Build with Friends
 
-## 📍 Your Unity Build Location
+## 📍 Get the Unity Build
 
-Your Unity build is currently located at:
+Download from: [Google Drive](https://drive.google.com/drive/folders/1lFqj6lopoIO96C_IO8yGXGzRMY1S4fzi) (zip name: `dPickleball BuildFiless.zip`)
+
+After extraction, the build typically lives at:
 ```
 C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe
 ```

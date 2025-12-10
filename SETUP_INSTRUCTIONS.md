@@ -64,15 +64,12 @@ pip install -r requirements.txt
 
 **⚠️ IMPORTANT: The Unity build (`dp.exe`) is NOT in this repository!**
 
-You need to get the Unity build separately. The repository only contains training scripts, not the Unity game executable.
+Download it here: [Google Drive link](https://drive.google.com/drive/folders/1lFqj6lopoIO96C_IO8yGXGzRMY1S4fzi) (zip: `dPickleball BuildFiless.zip`).
 
 **How to get the Unity build:**
-1. **Ask the repository owner** (your friend who set this up) to share the Unity build folder
-2. **Or download from the original source** if available
-3. **The Unity build should contain:**
-   - A file named `dp.exe` (the main executable)
-   - Usually located in a folder like `Training/Windows/` or `Builds/Windows/`
-   - May include other supporting files (DLLs, data folders, etc.)
+1. Download the zip from the link above
+2. Extract it (it should contain `dp.exe`, `dp_Data/`, `MonoBleedingEdge/`, etc.)
+3. The Unity build should live in a folder like `Training/Windows/`
 
 **Once you have the Unity build:**
 - Extract/copy it to a location on your computer (e.g., `C:\dPickleball\Training\Windows\`)

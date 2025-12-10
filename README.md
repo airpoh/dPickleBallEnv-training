@@ -73,11 +73,11 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
 
 1. **⚠️ IMPORTANT: Get Unity Build First!**
    
-   **The Unity build (`dp.exe`) is NOT in this repository!** You need to get it separately.
+   **The Unity build (`dp.exe`) is NOT in this repository!** Download it here: [Google Drive link](https://drive.google.com/drive/folders/1lFqj6lopoIO96C_IO8yGXGzRMY1S4fzi) (zip: `dPickleball BuildFiless.zip`), then extract.
    
-   - Ask the repository owner to share the Unity build folder
-   - The Unity build contains `dp.exe` and supporting files
+   - Download the zip from the link above
    - Extract it to a location on your computer (e.g., `C:\dPickleball\Training\Windows\`)
+   - The Unity build contains `dp.exe` and supporting files
 
 2. **⚠️ IMPORTANT: Update Unity Build Path!**
    
