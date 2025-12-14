@@ -2,6 +2,9 @@
 Quick test script to verify training setup works before starting full training.
 Tests Unity environment, model creation, and runs just 100 steps.
 """
+import os
+# Disable ML-Agents remote registry to avoid manifest fetch issues
+os.environ["MLAGENTS_DISABLE_REGISTRY"] = "1"
 from mlagents_envs.environment import UnityEnvironment
 from mlagents_envs.envs.custom_side_channel import CustomDataChannel, StringSideChannel
 from stable_baselines3 import A2C
