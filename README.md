@@ -24,6 +24,10 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
 ### Documentation
 - **`HOW_TO_TRANSFER_TRAINING.md`** - Instructions for transferring training between computers
 - **`COLLABORATIVE_TRAINING.md`** - Guide for multiple friends taking turns training
+- **`SETUP_INSTRUCTIONS.md`** - Detailed setup guide for friends
+
+### ⚠️ NOT Included
+- **Unity Build (`dp.exe`)** - Must be obtained separately from the repository owner
 
 ## 🚀 Quick Start
 
@@ -67,9 +71,17 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
 
 ### Training
 
-1. **⚠️ IMPORTANT: Update Unity Build Path First!**
+1. **⚠️ IMPORTANT: Get Unity Build First!**
    
-   Before running training, you MUST update the Unity build path in both `train.py` and `test_training.py`.
+   **The Unity build (`dp.exe`) is NOT in this repository!** Download it here: [Google Drive link](https://drive.google.com/drive/folders/1lFqj6lopoIO96C_IO8yGXGzRMY1S4fzi) (zip: `dPickleball BuildFiless.zip`), then extract.
+   
+   - Download the zip from the link above
+   - Extract it to a location on your computer (e.g., `C:\dPickleball\Training\Windows\`)
+   - The Unity build contains `dp.exe` and supporting files
+
+2. **⚠️ IMPORTANT: Update Unity Build Path!**
+   
+   After getting the Unity build, you MUST update the Unity build path in both `train.py` and `test_training.py`.
    
    Look for `UNITY_BUILD_PATH` near the top of each file (around line 20) and update it:
    ```python
@@ -79,21 +91,23 @@ This project trains an AI agent to play pickleball using Stable-Baselines3 (A2C 
    )
    ```
    
+   Replace the path with the actual location of your `dp.exe` file.
+   
    Or set the `UNITY_BUILD_PATH` environment variable instead.
    
    See `SETUP_INSTRUCTIONS.md` for detailed instructions.
 
-2. **Test your setup first:**
+3. **Test your setup first:**
    ```bash
    python test_training.py
    ```
 
-3. **Start training:**
+4. **Start training:**
    ```bash
    python train.py
    ```
 
-3. **Training will:**
+5. **Training will:**
    - Save checkpoints every 10,000 steps in `./model/` directory
    - Save final model as `./model/last_model.zip`
    - Can be resumed by running `train.py` again
@@ -109,6 +123,13 @@ Then run:
 ```bash
 python CompetitionScripts/Competition.py
 ```
+
+To play left side using your right-trained model:
+- Set environment variable before running:
+  - PowerShell: `$env:AGENT_SIDE="left"`
+  - CMD: `set AGENT_SIDE=left`
+- Default (no env var) is right side.
+- The code mirrors observations/actions so the right-trained checkpoint works on either side.
 
 ## 📊 Training Configuration
 
