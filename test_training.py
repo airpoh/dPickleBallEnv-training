@@ -24,7 +24,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 # You can also set the UNITY_BUILD_PATH environment variable instead
 UNITY_BUILD_PATH = os.getenv(
     "UNITY_BUILD_PATH",
-    r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe"  # DEFAULT - UPDATE THIS!
+    r'/Users/quanpin/Downloads/dPickleball BuildFiles/Training/Mac/Mac.app'  # DEFAULT - UPDATE THIS!
 )
 
 string_channel = StringSideChannel()

@@ -19,7 +19,7 @@ CHECKPOINT_FREQ = 10_000  # Save checkpoint every N steps (lower = more frequent
 # You can also set the UNITY_BUILD_PATH environment variable instead
 UNITY_BUILD_PATH = os.getenv(
     "UNITY_BUILD_PATH",
-    r"C:\Users\User\Downloads\dPickleball BuildFiless\dPickleball BuildFiles\Training\Windows\dp.exe"  # DEFAULT - UPDATE THIS!
+    r'/Users/quanpin/Downloads/dPickleball BuildFiles/Training/Mac/Mac.app'  # DEFAULT - UPDATE THIS!
 )
 
 # Create model directory if it doesn't exist
@@ -85,9 +85,17 @@ policy_kwargs = dict(
     features_extractor_kwargs=dict(features_dim=512)
 )
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Training on device: {device}")
-
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#print(f"Training on device: {device}")
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+    device = torch.device("mps")
+    print("🔥 Using Apple Silicon GPU (MPS)")
+else:
+    device = torch.device("cpu")
+    print("⚠️ No GPU detected, using CPU")
 # --- CHECKPOINT CALLBACK (saves during training) ---
 checkpoint_callback = CheckpointCallback(
     save_freq=CHECKPOINT_FREQ,
